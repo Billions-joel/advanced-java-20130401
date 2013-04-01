@@ -25,7 +25,9 @@ public class ImmutableList<A> {
 	}
 
 	public <B> ImmutableList<B> map(Function<A, B> fn) {
-		return null; // TODO
+		return size == 0
+			? ImmutableList.<B>empty()
+			: tail.map(fn).prepend(fn.apply(head));
 	}
 
 	@SuppressWarnings("unchecked")
