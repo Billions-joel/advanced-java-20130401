@@ -6,6 +6,7 @@ Immutability
 
 * Makes it easier to subclass correctly (LSP)
 * Makes structural identity stable (safe for use in hash-based collections)
+* Makes client code easier to write
 
 Liskov Substitution Principle
 -----------------------------

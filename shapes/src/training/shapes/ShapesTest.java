@@ -10,13 +10,6 @@ public class ShapesTest {
 
 	private static final Random RANDOM = new Random();
 
-	/*
-	 * equal rectangles must be equal
-	 * equal rectangles must have equal hashcodes
-	 * rectangle: setWidth shouldn't affect height and vice-versa
-	 * squares must remain square
-	 */
-
 	@Test
 	public void equalRectanglesMustBeEqual() {
 		for (int i = 0; i < 100; i++) {
@@ -56,4 +49,5 @@ public class ShapesTest {
 	private static Square arbitrarySquare() {
 		return new Square(RANDOM.nextInt(50));
 	}
+
 }
