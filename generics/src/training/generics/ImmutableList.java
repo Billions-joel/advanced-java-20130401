@@ -2,19 +2,22 @@ package training.generics;
 
 public class ImmutableList<E> {
 
-	private static final ImmutableList<Object> empty = new ImmutableList<Object>();
+	private static final ImmutableList<Object> EMPTY = new ImmutableList<Object>();
 
 	public final E head;
 	public final ImmutableList<E> tail;
+	public final int size;
 
 	private ImmutableList() {
 		head = null;
 		tail = null;
+		size = 0;
 	}
 
 	private ImmutableList(E head, ImmutableList<E> tail) {
 		this.head = head;
 		this.tail = tail;
+		this.size = tail.size + 1;
 	}
 
 	public ImmutableList<E> prepend(E element) {
@@ -23,7 +26,7 @@ public class ImmutableList<E> {
 
 	@SuppressWarnings("unchecked")
 	public static <E> ImmutableList<E> empty() {
-		return (ImmutableList<E>) empty;
+		return (ImmutableList<E>) EMPTY;
 	}
 
 	@Override
