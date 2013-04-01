@@ -1,11 +1,11 @@
 package training.generics;
 
-public class ImmutableList<E> {
+public class ImmutableList<A> {
 
 	private static final ImmutableList<Object> EMPTY = new ImmutableList<Object>();
 
-	public final E head;
-	public final ImmutableList<E> tail;
+	public final A head;
+	public final ImmutableList<A> tail;
 	public final int size;
 
 	private ImmutableList() {
@@ -14,14 +14,18 @@ public class ImmutableList<E> {
 		size = 0;
 	}
 
-	private ImmutableList(E head, ImmutableList<E> tail) {
+	private ImmutableList(A head, ImmutableList<A> tail) {
 		this.head = head;
 		this.tail = tail;
 		this.size = tail.size + 1;
 	}
 
-	public ImmutableList<E> prepend(E element) {
-		return new ImmutableList<E>(element, this);
+	public ImmutableList<A> prepend(A element) {
+		return new ImmutableList<A>(element, this);
+	}
+
+	public <B> ImmutableList<B> map(Function<A, B> fn) {
+		return null; // TODO
 	}
 
 	@SuppressWarnings("unchecked")
