@@ -26,6 +26,5 @@ Polymorphism
 
 * Subtype polymorphism (subclass - superclass relationship)
 * Parametric polymorphism (generics)
-
-
+* When the two collide, you have to pay attention to type bounds
 
