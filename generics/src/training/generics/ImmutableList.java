@@ -24,7 +24,7 @@ public class ImmutableList<A> {
 		return new ImmutableList<A>(element, this);
 	}
 
-	public <B> ImmutableList<B> map(Function<? super A, B> fn) {
+	public <B> ImmutableList<B> map(Function<? super A, ? extends B> fn) {
 		return size == 0
 			? ImmutableList.<B>empty()
 			: tail.map(fn).prepend(fn.apply(head));

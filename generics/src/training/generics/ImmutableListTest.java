@@ -11,8 +11,8 @@ public class ImmutableListTest {
 		ONE_TWO_THREE = EMPTY.prepend(3).prepend(2).prepend(1),
 		ZERO_ONE_TWO_THREE = ONE_TWO_THREE.prepend(0),
 		ONE_FOUR_NINE = EMPTY.prepend(9).prepend(4).prepend(1);
-	private static final ImmutableList<String>
-		ONE_TWO_THREE_STRINGS = ImmutableList.<String>empty().prepend("3").prepend("2").prepend("1");
+	private static final ImmutableList<Object>
+		ONE_TWO_THREE_OBJECTS = ImmutableList.empty().prepend("3").prepend("2").prepend("1");
 
 	private static final Function<Integer, Integer>
 		SQUARE_FUNCTION = new Function<Integer, Integer>() {
@@ -42,7 +42,7 @@ public class ImmutableListTest {
 
 	@Test
 	public void testMapTypeBounds() {
-		assertEquals(ONE_TWO_THREE_STRINGS, ONE_TWO_THREE.map(TO_STRING_FUNCTION));
+		assertEquals(ONE_TWO_THREE_OBJECTS, ONE_TWO_THREE.<Object>map(TO_STRING_FUNCTION));
 	}
 
 }
