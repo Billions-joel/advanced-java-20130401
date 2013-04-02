@@ -14,7 +14,9 @@ public class Logger implements Runnable {
 	@Override
 	public void run() {
 		while (true) {
-			if (!messages.isEmpty()) {
+			if (messages.isEmpty()) {
+				Thread.yield();
+			} else {
 				System.out.println(messages.remove());
 			}
 		}
