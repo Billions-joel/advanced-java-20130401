@@ -12,7 +12,7 @@ public class Main {
 		Logger logger = new Logger();
 		pool.execute(logger);
 
-		for (int i = 0; i < 20; i++) {
+		while (true) {
 			pool.execute(new Fibonacci(logger));
 		}
 
