@@ -1,30 +1,31 @@
 package training.concurrency;
 
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.concurrent.atomic.AtomicReference;
+
+import training.generics.ImmutableQueue;
+import training.generics.ImmutableQueue.DequeueResult;
 
 public class Logger implements Runnable {
 
-	private final AtomicReference<Queue<String>> messagesRef =
-			new AtomicReference<Queue<String>>(new LinkedList<String>());
+	private final AtomicReference<ImmutableQueue<String>> messagesRef =
+			new AtomicReference<ImmutableQueue<String>>(ImmutableQueue.<String>empty());
 
 	public void log(String message) {
-		Queue<String> oldMessages, newMessages;
+		ImmutableQueue<String> oldMessages, newMessages;
 		do {
 			oldMessages = messagesRef.get();
-			newMessages = new LinkedList<String>(oldMessages);
-			newMessages.add(message);
+			newMessages = oldMessages.enqueue(message);
 		} while (!messagesRef.compareAndSet(oldMessages, newMessages));
 	}
 
 	@Override
 	public void run() {
 		while (true) {
-			Queue<String> oldMessages = messagesRef.get();
+			ImmutableQueue<String> oldMessages = messagesRef.get();
 			if (!oldMessages.isEmpty()) {
-				Queue<String> newMessages = new LinkedList<String>(oldMessages);
-				String message = newMessages.remove();
+				DequeueResult<String> result = oldMessages.dequeue();
+				String message = result.head;
+				ImmutableQueue<String> newMessages = result.tail;
 				if (messagesRef.compareAndSet(oldMessages, newMessages))
 					System.out.println(message);
 			}

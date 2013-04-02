@@ -4,15 +4,15 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class ImmutableListTest {
+public class ImmutableStackTest {
 
-	private static final ImmutableList<Integer> EMPTY = ImmutableList.empty();
-	private static final ImmutableList<Integer>
+	private static final ImmutableStack<Integer> EMPTY = ImmutableStack.empty();
+	private static final ImmutableStack<Integer>
 		ONE_TWO_THREE = EMPTY.prepend(3).prepend(2).prepend(1),
 		ZERO_ONE_TWO_THREE = ONE_TWO_THREE.prepend(0),
 		ONE_FOUR_NINE = EMPTY.prepend(9).prepend(4).prepend(1);
-	private static final ImmutableList<Object>
-		ONE_TWO_THREE_OBJECTS = ImmutableList.empty().prepend("3").prepend("2").prepend("1");
+	private static final ImmutableStack<Object>
+		ONE_TWO_THREE_OBJECTS = ImmutableStack.empty().prepend("3").prepend("2").prepend("1");
 
 	private static final Function<Integer, Integer>
 		SQUARE_FUNCTION = new Function<Integer, Integer>() {
@@ -31,7 +31,7 @@ public class ImmutableListTest {
 		};
 
 	@Test
-	public void listsMustShareSubstructure() {
+	public void stacksMustShareSubstructure() {
 		assertSame(ONE_TWO_THREE, ZERO_ONE_TWO_THREE.tail);
 	}
 

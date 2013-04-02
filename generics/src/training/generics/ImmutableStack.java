@@ -1,38 +1,38 @@
 package training.generics;
 
-public class ImmutableList<A> {
+public class ImmutableStack<A> {
 
-	private static final ImmutableList<Object> EMPTY = new ImmutableList<Object>();
+	private static final ImmutableStack<Object> EMPTY = new ImmutableStack<Object>();
 
 	public final A head;
-	public final ImmutableList<A> tail;
+	public final ImmutableStack<A> tail;
 	public final int size;
 
-	private ImmutableList() {
+	private ImmutableStack() {
 		head = null;
 		tail = null;
 		size = 0;
 	}
 
-	private ImmutableList(A head, ImmutableList<A> tail) {
+	private ImmutableStack(A head, ImmutableStack<A> tail) {
 		this.head = head;
 		this.tail = tail;
 		this.size = tail.size + 1;
 	}
 
-	public ImmutableList<A> prepend(A element) {
-		return new ImmutableList<A>(element, this);
+	public ImmutableStack<A> prepend(A element) {
+		return new ImmutableStack<A>(element, this);
 	}
 
-	public <B> ImmutableList<B> map(Function<? super A, ? extends B> fn) {
+	public <B> ImmutableStack<B> map(Function<? super A, ? extends B> fn) {
 		return size == 0
-			? ImmutableList.<B>empty()
+			? ImmutableStack.<B>empty()
 			: tail.map(fn).prepend(fn.apply(head));
 	}
 
 	@SuppressWarnings("unchecked")
-	public static <E> ImmutableList<E> empty() {
-		return (ImmutableList<E>) EMPTY;
+	public static <A> ImmutableStack<A> empty() {
+		return (ImmutableStack<A>) EMPTY;
 	}
 
 	@Override
@@ -53,7 +53,7 @@ public class ImmutableList<A> {
 		if (getClass() != obj.getClass())
 			return false;
 		@SuppressWarnings("rawtypes")
-		ImmutableList other = (ImmutableList) obj;
+		ImmutableStack other = (ImmutableStack) obj;
 		if (head == null) {
 			if (other.head != null)
 				return false;
