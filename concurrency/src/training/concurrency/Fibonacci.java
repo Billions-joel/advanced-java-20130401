@@ -6,6 +6,7 @@ import java.util.Random;
 public class Fibonacci implements Runnable {
 
 	private static final Random RANDOM = new Random();
+	// TODO: hold a reference to logger, and call logger.log in run() method
 
 	private static BigInteger fib(int n) {
 		return n < 2 ? BigInteger.ONE : fib(n-1).add(fib(n-2));
