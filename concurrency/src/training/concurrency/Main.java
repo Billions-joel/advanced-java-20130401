@@ -8,12 +8,14 @@ public class Main {
 
 	public static void main(String[] args) throws ExecutionException, InterruptedException {
 		
-		ExecutorService pool = Executors.newFixedThreadPool(10);
+		ExecutorService pool = Executors.newCachedThreadPool();
 		Logger logger = new Logger();
 		pool.execute(logger);
 
-		while (true) {
-			pool.execute(new Fibonacci(logger));
+		for (int i = 0; i < 10; i++) {
+			Fibonacci fib = new Fibonacci(logger);
+			pool.execute(fib);
+			fib.tell(Fibonacci.Message.FIB);
 		}
 
 //		pool.shutdown();

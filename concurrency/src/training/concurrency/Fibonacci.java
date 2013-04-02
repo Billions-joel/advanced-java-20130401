@@ -3,7 +3,9 @@ package training.concurrency;
 import java.math.BigInteger;
 import java.util.Random;
 
-public class Fibonacci implements Runnable {
+public class Fibonacci extends Actor {
+
+	public static enum Message { FIB }
 
 	private static final Random RANDOM = new Random();
 	private final Logger logger;
@@ -21,8 +23,11 @@ public class Fibonacci implements Runnable {
 	}
 
 	@Override
-	public void run() {
-		logger.tell(randomFib());
+	protected void receive(Object message) {
+		if (message == Message.FIB) {
+			logger.tell(randomFib());
+			tell(Message.FIB);
+		}
 	}
 
 }
