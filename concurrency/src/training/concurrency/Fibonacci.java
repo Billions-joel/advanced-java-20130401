@@ -3,7 +3,7 @@ package training.concurrency;
 import java.math.BigInteger;
 import java.util.Random;
 
-public class Fibonacci {
+public class Fibonacci implements Runnable {
 
 	private static final Random RANDOM = new Random();
 
@@ -15,4 +15,8 @@ public class Fibonacci {
 		return fib(RANDOM.nextInt(35));
 	}
 
+	@Override
+	public void run() {
+		System.out.println(randomFib());
+	}
 }
