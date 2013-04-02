@@ -22,7 +22,7 @@ public class Fibonacci implements Runnable {
 
 	@Override
 	public void run() {
-		logger.log(randomFib().toString());
+		logger.tell(randomFib());
 	}
 
 }

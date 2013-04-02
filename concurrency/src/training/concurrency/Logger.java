@@ -1,29 +1,10 @@
 package training.concurrency;
 
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
-
-public class Logger implements Runnable {
-
-	private final BlockingQueue<String> messages = new LinkedBlockingQueue<String>();
-
-	public void log(String message) {
-		try {
-			messages.put(message);
-		} catch (InterruptedException e) {
-			Thread.currentThread().interrupt();
-		}
-	}
+public class Logger extends Actor {
 
 	@Override
-	public void run() {
-		try {
-			while (true) {
-				System.out.println(messages.take());
-			}
-		} catch (InterruptedException e) {
-			Thread.currentThread().interrupt();
-		}
+	protected void receive(Object message) {
+		System.out.println(message);
 	}
 
 }
