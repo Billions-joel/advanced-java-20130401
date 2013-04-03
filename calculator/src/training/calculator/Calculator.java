@@ -14,24 +14,22 @@ public class Calculator {
 	}
 
 	public static boolean handleOperator(String token, Stack<Integer> stack) {
+		Operator op;
 		if (token.equals("+")) {
-			int rhs = stack.pop(), lhs = stack.pop();
-			stack.push(lhs + rhs);
-			return true;
+			op = Operator.ADD;
 		} else if (token.equals("-")) {
-			int rhs = stack.pop(), lhs = stack.pop();
-			stack.push(lhs - rhs);
-			return true;
+			op = Operator.SUBTRACT;
 		} else if (token.equals("*")) {
-			int rhs = stack.pop(), lhs = stack.pop();
-			stack.push(lhs * rhs);
-			return true;
+			op = Operator.MULTIPLY;
 		} else if (token.equals("/")) {
-			int rhs = stack.pop(), lhs = stack.pop();
-			stack.push(lhs / rhs);
-			return true;
+			op = Operator.DIVIDE;
+		} else {
+			return false;
 		}
-		return false;
+
+		int rhs = stack.pop(), lhs = stack.pop();
+		stack.push(op.operate(lhs, rhs));
+		return true;
 	}
 
 	public static int calculate(String expression) {
