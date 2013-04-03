@@ -13,7 +13,7 @@ public interface Expression {
 
 		@Override
 		public <A> A accept(ExpressionVisitor<A> fn) {
-			return fn.apply(this);
+			return fn.visitNum(this);
 		}
 
 		@Override
@@ -52,7 +52,7 @@ public interface Expression {
 
 		@Override
 		public <A> A accept(ExpressionVisitor<A> fn) {
-			return fn.apply(this);
+			return fn.visitOp(this);
 		}
 
 		@Override

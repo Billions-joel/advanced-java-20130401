@@ -40,7 +40,10 @@ public class Calculator {
 			return;
 		}
 		Expression e = parse(args[0]);
-		System.out.println(e.accept(INFIX) + " = " + e.accept(VALUE));
+		System.out.println("Prefix: " + e.accept(PREFIX));
+		System.out.println("Infix: " + e.accept(INFIX));
+		System.out.println("Postfix: " + e.accept(POSTFIX));
+		System.out.println("Value: " + e.accept(VALUE));
 	}
 
 }
