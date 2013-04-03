@@ -2,7 +2,7 @@ package training.calculator;
 
 public interface Expression {
 
-	<A> A accept(ExpressionFunction<A> fn);
+	<A> A accept(ExpressionVisitor<A> fn);
 
 	static final class Num implements Expression {
 		public final int value;
@@ -12,7 +12,7 @@ public interface Expression {
 		}
 
 		@Override
-		public <A> A accept(ExpressionFunction<A> fn) {
+		public <A> A accept(ExpressionVisitor<A> fn) {
 			return fn.apply(this);
 		}
 
@@ -51,7 +51,7 @@ public interface Expression {
 		}
 
 		@Override
-		public <A> A accept(ExpressionFunction<A> fn) {
+		public <A> A accept(ExpressionVisitor<A> fn) {
 			return fn.apply(this);
 		}
 

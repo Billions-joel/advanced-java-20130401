@@ -1,9 +1,11 @@
 package training.calculator;
 
-public interface ExpressionFunction<A> {
-	A apply(Expression e);
+public interface ExpressionVisitor<A> {
 
-	static final ExpressionFunction<String> INFIX = new ExpressionFunction<String>() {
+	A visitNum(Expression.Num num);
+	A visitOp(Expression.Op op);
+
+	static final ExpressionVisitor<String> INFIX = new ExpressionVisitor<String>() {
 		@Override
 		public String apply(Expression e) {
 			if (e instanceof Expression.Num) {
@@ -17,7 +19,7 @@ public interface ExpressionFunction<A> {
 		}
 	};
 
-	static final ExpressionFunction<Integer> VALUE = new ExpressionFunction<Integer>() {
+	static final ExpressionVisitor<Integer> VALUE = new ExpressionVisitor<Integer>() {
 		@Override
 		public Integer apply(Expression e) {
 			if (e instanceof Expression.Num) {

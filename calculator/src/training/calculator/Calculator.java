@@ -1,7 +1,7 @@
 package training.calculator;
 
 import java.util.Stack;
-import static training.calculator.ExpressionFunction.*;
+import static training.calculator.ExpressionVisitor.*;
 
 public class Calculator {
 
