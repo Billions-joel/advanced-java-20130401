@@ -1,6 +1,7 @@
 package training.calculator;
 
 import java.util.Stack;
+import static training.calculator.ExpressionFunction.*;
 
 public class Calculator {
 
@@ -39,7 +40,7 @@ public class Calculator {
 			return;
 		}
 		Expression e = parse(args[0]);
-		System.out.println(e.infix() + " = " + e.value());
+		System.out.println(e.accept(INFIX) + " = " + e.accept(VALUE));
 	}
 
 }
