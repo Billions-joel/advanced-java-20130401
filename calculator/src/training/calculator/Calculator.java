@@ -4,6 +4,18 @@ import java.util.Stack;
 
 public class Calculator {
 
+	public static boolean handleNumber(String token, Stack<Integer> stack) {
+		return false; // TODO
+	}
+
+	public static boolean handleOperator(String token, Stack<Integer> stack) {
+		return false; // TODO
+	}
+
+	public static int calculate(String expression) {
+		return 0; // TODO
+	}
+
 	public static void main(String[] args) {
 		if (args.length != 1) {
 			System.err.println("Usage: Calculator <expression>");
