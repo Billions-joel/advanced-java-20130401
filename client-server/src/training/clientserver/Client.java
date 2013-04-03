@@ -1,9 +1,11 @@
 package training.clientserver;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.util.Random;
 
 public class Client {
 
@@ -11,9 +13,16 @@ public class Client {
 		try {
 			Socket server = new Socket(InetAddress.getLocalHost(), 31337);
 			try {
-				PrintWriter out = new PrintWriter(server.getOutputStream(), true);
+				ObjectOutputStream out = new ObjectOutputStream(server.getOutputStream());
 				try {
-					out.println("hello, server");
+					out.writeObject(new Random().nextInt(1000));
+					ObjectInputStream in = new ObjectInputStream(server.getInputStream());
+					try {
+						System.out.println(in.readObject());
+					} catch (ClassNotFoundException e) {
+					} finally {
+						in.close();
+					}
 				} finally {
 					out.close();
 				}
