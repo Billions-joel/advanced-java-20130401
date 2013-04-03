@@ -2,11 +2,18 @@ package training.calculator;
 
 public interface Expression {
 
+	String infix();
+
 	static final class Num implements Expression {
 		public final int value;
 
 		public Num(int value) {
 			this.value = value;
+		}
+
+		@Override
+		public String infix() {
+			return String.valueOf(value);
 		}
 
 		@Override
@@ -30,7 +37,7 @@ public interface Expression {
 				return false;
 			return true;
 		}
-		
+
 	}
 
 	static final class Op implements Expression {
@@ -41,6 +48,11 @@ public interface Expression {
 			this.op = op;
 			this.lhs = lhs;
 			this.rhs = rhs;
+		}
+
+		@Override
+		public String infix() {
+			return String.format("(%s %s %s)", lhs.infix(), op, rhs.infix());
 		}
 
 		@Override

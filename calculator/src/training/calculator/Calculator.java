@@ -38,7 +38,8 @@ public class Calculator {
 			System.err.println("Usage: Calculator <expression>");
 			return;
 		}
-		System.out.println(parse(args[0]));
+		Expression e = parse(args[0]);
+		System.out.println(e.infix());
 	}
 
 }

@@ -47,5 +47,10 @@ public enum Operator {
 		return operators.get(token);
 	}
 
+	@Override
+	public String toString() {
+		return token;
+	}
+
 	public abstract int operate(int lhs, int rhs);
 }
