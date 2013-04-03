@@ -1,36 +1,51 @@
 package training.calculator;
 
-public abstract class Operator {
+import java.util.HashMap;
+import java.util.Map;
 
-	public static final Operator ADD = new Operator() {
+public enum Operator {
+
+	ADD("+") {
 		@Override
 		public int operate(int lhs, int rhs) {
 			return lhs + rhs;
 		}
-	};
-
-	public static final Operator SUBTRACT = new Operator() {
+	},
+	SUBTRACT("-") {
 		@Override
 		public int operate(int lhs, int rhs) {
 			return lhs - rhs;
 		}
-	};
-
-	public static final Operator MULTIPLY = new Operator() {
+	},
+	MULTIPLY("*") {
 		@Override
 		public int operate(int lhs, int rhs) {
 			return lhs * rhs;
 		}
-	};
-
-	public static final Operator DIVIDE = new Operator() {
+	},
+	DIVIDE("/") {
 		@Override
 		public int operate(int lhs, int rhs) {
 			return lhs / rhs;
 		}
 	};
 
-	public abstract int operate(int lhs, int rhs);
-	private Operator() {}
+	private static final Map<String, Operator> operators;
+	static {
+		operators = new HashMap<String, Operator>();
+		for (Operator op : values()) {
+			operators.put(op.token, op);
+		}
+	}
 
+	private final String token;
+	private Operator(String token) {
+		this.token = token;
+	}
+
+	public static Operator get(String token) {
+		return operators.get(token);
+	}
+
+	public abstract int operate(int lhs, int rhs);
 }

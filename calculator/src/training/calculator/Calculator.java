@@ -14,18 +14,9 @@ public class Calculator {
 	}
 
 	public static boolean handleOperator(String token, Stack<Integer> stack) {
-		Operator op;
-		if (token.equals("+")) {
-			op = Operator.ADD;
-		} else if (token.equals("-")) {
-			op = Operator.SUBTRACT;
-		} else if (token.equals("*")) {
-			op = Operator.MULTIPLY;
-		} else if (token.equals("/")) {
-			op = Operator.DIVIDE;
-		} else {
+		Operator op = Operator.get(token);
+		if (op == null)
 			return false;
-		}
 
 		int rhs = stack.pop(), lhs = stack.pop();
 		stack.push(op.operate(lhs, rhs));
