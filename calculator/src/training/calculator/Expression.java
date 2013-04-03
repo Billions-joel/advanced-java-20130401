@@ -2,6 +2,9 @@ package training.calculator;
 
 public interface Expression {
 
+	String infix();
+	int value();
+
 	<A> A accept(ExpressionFunction<A> fn);
 
 	static final class Num implements Expression {
@@ -19,6 +22,11 @@ public interface Expression {
 		@Override
 		public int value() {
 			return value;
+		}
+
+		@Override
+		public <A> A accept(ExpressionFunction<A> fn) {
+			return fn.apply(this);
 		}
 
 		@Override
@@ -63,6 +71,11 @@ public interface Expression {
 		@Override
 		public int value() {
 			return op.operate(lhs.value(), rhs.value());
+		}
+
+		@Override
+		public <A> A accept(ExpressionFunction<A> fn) {
+			return fn.apply(this);
 		}
 
 		@Override
