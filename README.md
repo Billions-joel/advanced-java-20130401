@@ -7,6 +7,7 @@ Immutability
 * Makes it easier to subclass correctly (LSP)
 * Makes structural identity stable (safe for use in hash-based collections)
 * Makes client code easier to write
+* Immutable objects can be shared safely between threads
 
 Liskov Substitution Principle
 -----------------------------
@@ -28,3 +29,13 @@ Polymorphism
 * Parametric polymorphism (generics)
 * When the two collide, you have to pay attention to type bounds
 
+Concurrency
+-----------
+
+* Traditional lock-based concurrency is too damn hard.
+* Use specialized classes from `java.util.concurrent.*` (e.g. `AtomicReference`) when appropriate.
+* In general, prefer actors:
+  - Generalization of the Producer-Consumer pattern.
+  - Mutable state is encapsulated by an actor, and never thread-shared.
+  - An actor's internal state changes only in response to messages.
+  - Implemented using a message queue: `java.util.concurrent.BlockingQueue`
