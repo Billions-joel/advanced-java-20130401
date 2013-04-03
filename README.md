@@ -39,3 +39,9 @@ Concurrency
   - Mutable state is encapsulated by an actor, and never thread-shared.
   - An actor's internal state changes only in response to messages.
   - Implemented using a message queue: `java.util.concurrent.BlockingQueue`
+
+Design Patterns
+---------------
+
+* Strategy: encapsulate varying behavior in an object.
+* (Enum) Singleton: provide a fixed set of instances.

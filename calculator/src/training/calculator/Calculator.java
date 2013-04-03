@@ -4,27 +4,27 @@ import java.util.Stack;
 
 public class Calculator {
 
-	public static boolean handleNumber(String token, Stack<Integer> stack) {
+	public static boolean handleNumber(String token, Stack<Expression> stack) {
 		try {
-			stack.push(Integer.parseInt(token));
+			stack.push(new Expression.Num(Integer.parseInt(token)));
 			return true;
 		} catch (NumberFormatException e) {
 			return false;
 		}
 	}
 
-	public static boolean handleOperator(String token, Stack<Integer> stack) {
+	public static boolean handleOperator(String token, Stack<Expression> stack) {
 		Operator op = Operator.get(token);
 		if (op == null)
 			return false;
 
-		int rhs = stack.pop(), lhs = stack.pop();
-		stack.push(op.operate(lhs, rhs));
+		Expression rhs = stack.pop(), lhs = stack.pop();
+		stack.push(new Expression.Op(op, lhs, rhs));
 		return true;
 	}
 
-	public static int calculate(String expression) {
-		Stack<Integer> stack = new Stack<Integer>();
+	public static Expression parse(String expression) {
+		Stack<Expression> stack = new Stack<Expression>();
 		for (String token : expression.split(" ")) {
 			if (!handleNumber(token, stack) && !handleOperator(token, stack)) {
 				throw new IllegalArgumentException("invalid token: " + token);
@@ -38,7 +38,7 @@ public class Calculator {
 			System.err.println("Usage: Calculator <expression>");
 			return;
 		}
-		System.out.println(calculate(args[0]));
+		System.out.println(parse(args[0]));
 	}
 
 }
