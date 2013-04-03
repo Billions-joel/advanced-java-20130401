@@ -3,6 +3,7 @@ package training.calculator;
 public interface Expression {
 
 	String infix();
+	int value();
 
 	static final class Num implements Expression {
 		public final int value;
@@ -14,6 +15,11 @@ public interface Expression {
 		@Override
 		public String infix() {
 			return String.valueOf(value);
+		}
+
+		@Override
+		public int value() {
+			return value;
 		}
 
 		@Override
@@ -53,6 +59,11 @@ public interface Expression {
 		@Override
 		public String infix() {
 			return String.format("(%s %s %s)", lhs.infix(), op, rhs.infix());
+		}
+
+		@Override
+		public int value() {
+			return op.operate(lhs.value(), rhs.value());
 		}
 
 		@Override

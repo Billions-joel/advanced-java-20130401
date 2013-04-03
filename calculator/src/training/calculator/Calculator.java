@@ -39,7 +39,7 @@ public class Calculator {
 			return;
 		}
 		Expression e = parse(args[0]);
-		System.out.println(e.infix());
+		System.out.println(e.infix() + " = " + e.value());
 	}
 
 }

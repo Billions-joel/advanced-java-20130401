@@ -45,3 +45,4 @@ Design Patterns
 
 * Strategy: encapsulate varying behavior in an object.
 * (Enum) Singleton: provide a fixed set of instances.
+* Composite: recursive data structures (e.g. syntax trees, widget layouts).
