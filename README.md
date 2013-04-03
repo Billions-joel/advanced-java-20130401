@@ -47,3 +47,5 @@ Design Patterns
 * (Enum) Singleton: provide a fixed set of instances.
 * Composite: recursive data structures (e.g. syntax trees, widget layouts).
 * Visitor: composite + strategy. Allow traversal of composites with arbitrary behavior.
+* Adapter: wraps instance to provide different API.
+* Decorator: wraps instance to provide additional bells and whistles.
