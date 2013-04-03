@@ -5,15 +5,43 @@ import java.util.Stack;
 public class Calculator {
 
 	public static boolean handleNumber(String token, Stack<Integer> stack) {
-		return false; // TODO
+		try {
+			stack.push(Integer.parseInt(token));
+			return true;
+		} catch (NumberFormatException e) {
+			return false;
+		}
 	}
 
 	public static boolean handleOperator(String token, Stack<Integer> stack) {
-		return false; // TODO
+		if (token.equals("+")) {
+			int rhs = stack.pop(), lhs = stack.pop();
+			stack.push(lhs + rhs);
+			return true;
+		} else if (token.equals("-")) {
+			int rhs = stack.pop(), lhs = stack.pop();
+			stack.push(lhs - rhs);
+			return true;
+		} else if (token.equals("*")) {
+			int rhs = stack.pop(), lhs = stack.pop();
+			stack.push(lhs * rhs);
+			return true;
+		} else if (token.equals("/")) {
+			int rhs = stack.pop(), lhs = stack.pop();
+			stack.push(lhs / rhs);
+			return true;
+		}
+		return false;
 	}
 
 	public static int calculate(String expression) {
-		return 0; // TODO
+		Stack<Integer> stack = new Stack<Integer>();
+		for (String token : expression.split(" ")) {
+			if (!handleNumber(token, stack) && !handleOperator(token, stack)) {
+				throw new IllegalArgumentException("invalid token: " + token);
+			}
+		}
+		return stack.pop();
 	}
 
 	public static void main(String[] args) {
@@ -21,31 +49,7 @@ public class Calculator {
 			System.err.println("Usage: Calculator <expression>");
 			return;
 		}
-
-		Stack<Integer> stack = new Stack<Integer>();
-		for (String token : args[0].split(" ")) {
-			try {
-				stack.push(Integer.parseInt(token));
-			} catch (NumberFormatException e) {
-				if (token.equals("+")) {
-					int rhs = stack.pop(), lhs = stack.pop();
-					stack.push(lhs + rhs);
-				} else if (token.equals("-")) {
-					int rhs = stack.pop(), lhs = stack.pop();
-					stack.push(lhs - rhs);
-				} else if (token.equals("*")) {
-					int rhs = stack.pop(), lhs = stack.pop();
-					stack.push(lhs * rhs);
-				} else if (token.equals("/")) {
-					int rhs = stack.pop(), lhs = stack.pop();
-					stack.push(lhs / rhs);
-				} else {
-					throw new IllegalArgumentException("invalid token: " + token);
-				}
-			}
-		}
-		
-		System.out.println(stack.pop());
+		System.out.println(calculate(args[0]));
 	}
 
 }
