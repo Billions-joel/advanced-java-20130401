@@ -2,8 +2,7 @@ package training.calculator;
 
 public interface Expression {
 
-	String infix();
-	int value();
+	<A> A accept(ExpressionFunction<A> fn);
 
 	static final class Num implements Expression {
 		public final int value;
