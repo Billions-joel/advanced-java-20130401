@@ -5,6 +5,8 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 public abstract class Actor implements Runnable {
 
+	public static enum Message { SHUTDOWN }
+
 	private final BlockingQueue<Object> messages = new LinkedBlockingQueue<Object>();
 
 	protected abstract void receive(Object message);
@@ -21,7 +23,10 @@ public abstract class Actor implements Runnable {
 	public final void run() {
 		try {
 			while (true) {
-				receive(messages.take());
+				Object message = messages.take();
+				if (message == Message.SHUTDOWN)
+					break;
+				receive(message);
 			}
 		} catch (InterruptedException e) {
 			Thread.currentThread().interrupt();
